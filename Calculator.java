@@ -1,15 +1,22 @@
 import java.lang.String;
+import java.util.List;
+import java.util.ArrayList;
+
 public class Calculator {
     public static void main(String[] args){
-        int a = 12;
-        int b = 12;
-        int c = a*b;
+        float a = 1.1f;
+        float b = 2.2f;
+        float d = 0;
+        float c = a*b;
         int toNext = 0;
-        int value1, value2 = 0;
+        int f = 0;
+        
+        List<List<Integer>> zbiorcza = new ArrayList<List<Integer>>();
 
-        String[] toAArray = Integer.toString(a).split("");
-        String[] bArray = Integer.toString(b).split("");
+        String[] toAArray = Float.toString(a).split("");
+        String[] bArray = Float.toString(b).split("");
         String[] aArray = {"0"};
+        
         if(toAArray.length < bArray.length) {
             aArray = new String[toAArray.length + (bArray.length - toAArray.length)];
         }
@@ -20,7 +27,7 @@ public class Calculator {
             aArray = new String[bArray.length];
         }
         int l = toAArray.length-1;
-        for(int i = aArray.length-1; i >= 0; i--){
+        for(int i = 0; i < aArray.length; i++){
             if(l == -1){
                 aArray[i] = "0";
             }
@@ -31,21 +38,39 @@ public class Calculator {
 
         }
         int[] allValue = new int[bArray.length+aArray.length];
+        int[] toAddA = new int[aArray.length-1];
+        int[] toAddB = new int[bArray.length-1];
         for(int i = aArray.length-1; i >= 0; i--){
-            value1 = Integer.parseInt(aArray[i]);
-            for(int j = value1; j >= 0; j--){
+        	List<Integer> array = new ArrayList<Integer>();
+            /*for(int j = value1; j >= 0; j--){
                 if(toNext != 0){
                     allValue[i] += toNext;
                     toNext = 0;
                 }
                 value2 = Integer.parseInt(bArray[i]);
                 allValue[i] += value2;
-            }
-            if(Integer.toString(allValue[i]).length() > 1) {
-                toNext = Integer.parseInt(Integer.toString(allValue[i]).split("")[0]);
-                allValue[i] = Integer.parseInt(Integer.toString(allValue[i]).split("")[1]);
-            }
+            }*/
+        	if(!aArray[i].equals(".")) {
+	        	for(int x = 0; x < f; x++) {
+	        		array.add(0);
+	        	}
+	        	f++;
+        	}
+        	for(int j = bArray.length-1; j >= 0; j--) {
+        		if(!aArray[i].equals(".") && !bArray[j].equals(".")) {
+                	allValue[i] = Integer.parseInt(aArray[i])*Integer.parseInt(bArray[j])+toNext;
+                	if(toNext != 0) {
+                		toNext = 0;
+                	}
+                	array.add(allValue[i]);
+                	if(Integer.toString(allValue[j]).length() > 1) {
+                        toNext = Integer.parseInt(Integer.toString(allValue[j]).split("")[0]);
+                        allValue[i] = Integer.parseInt(Integer.toString(allValue[j]).split("")[1]);
+                    }
+                	
+                }
+        	}
+        	zbiorcza.add(array);
         }
-
     }
 }
