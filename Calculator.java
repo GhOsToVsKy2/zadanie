@@ -72,5 +72,20 @@ public class Calculator {
         	}
         	zbiorcza.add(array);
         }
+        List<String> wynik = new ArrayList<String>();
+        for(int i = zbiorcza.size()-1; i >= 0; i--){
+            List<Integer> list = zbiorcza.get(i);
+            String toSum = "";
+            for(int j = list.size()-1; j >= 0; j--){
+                toSum += list.get(j);
+            }
+            wynik.add(toSum);
+        }
+        System.out.println(wynik);
+        int koniec = 0;
+        for(int i = 0; i < wynik.size()-1; i++){
+            koniec += wynik.get(i);
+        }
+        System.out.println(koniec);
     }
 }
