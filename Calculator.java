@@ -83,9 +83,38 @@ public class Calculator {
         }
         System.out.println(wynik);
         int koniec = 0;
-        for(int i = 0; i < wynik.size()-1; i++){
-            koniec += wynik.get(i);
+        for(int i = 0; i < wynik.size(); i++){
+        	if(!wynik.get(i).equals("")) {
+        		koniec += Integer.parseInt(wynik.get(i));
+        	}
         }
-        System.out.println(koniec);
+        String[] x = Float.toString(a).split(".");
+        String[] y = Float.toString(b).split(".");
+        int X = 0;
+        int Y = 0;
+        if(x.length > 1) {
+        	X = x[1].split("").length;
+        }
+        if(y.length > 1) {
+        	Y = y[1].split("").length;
+        }
+        int przecinek = X + Y;
+        String[] kon = new String[Integer.toString(koniec).split("").length];
+        int j = 0;
+        kon[przecinek] = ".";
+        for(int i = 0; i < kon.length-1; i++) {
+        	kon[i] = "";
+        }
+        for(int i = 0; i < kon.length-1; i++) {
+        	if(!kon[i].equals(".")) {
+        		kon[i] = Float.toString(koniec).split("")[i+j];
+        	}
+        	if(kon[i].equals(".")) {
+        		j++;
+        	}
+        	System.out.println(kon[i]);
+        }
+        
+        
     }
 }
